@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+      #connection-warning {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #f2f2f2;
+  text-align: center;
+  padding: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #666;
+  z-index: 9999;
+}
+
+#connection-warning.show {
+  display: block;
+}
+    </style>
+  </head>
+  <body>
+    <!-- Add a container element to hold the warning message -->
+<div id="connection-warning" style="display:none;">
+  <p>Warning: Your internet connection appears to be lost.</p>
+  <p>Please check your connection and try again.</p>
+</div>
+<script>
+  // Check if the user's internet connection is lost
+function checkConnection() {
+  return navigator.onLine;
+}
+
+// Show the warning message if the connection is lost
+function showConnectionWarning() {
+  document.getElementById('connection-warning').classList.add('show');
+}
+
+// Hide the warning message if the connection is restored
+function hideConnectionWarning() {
+  document.getElementById('connection-warning').classList.remove('show');
+}
+
+// Set up event listeners for connection changes
+document.addEventListener('online', function() {
+  hideConnectionWarning();
+});
+
+document.addEventListener('offline', function() {
+  showConnectionWarning();
+});
+
+// Check the connection status initially
+if (!checkConnection()) {
+  showConnectionWarning();
+}
+</script>
+  </body>
+</html>
